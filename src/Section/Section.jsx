@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import './Section.css';
 import workingIcon from '../assets/images/illustration-working.svg'
 import linkBG from '../assets/images/bg-boost-mobile.svg'
+import brand from '../assets/images/icon-brand-recognition.svg'
+import detail from '../assets/images/icon-detailed-records.svg'
+import fully from '../assets/images/icon-fully-customizable.svg'
 
 function Section() {
     const [shortUrl, setShortUrl] = useState();
@@ -79,10 +82,42 @@ function Section() {
                 <span className='short_link pt-3 ps-2 pb-3 text-left'>www.google.com</span>
                 <button className='mt-3 mb-3 rounded rounded-3 border-0'>copy</button>
             </div>
+            
+            
         </div>
 
-        <div className="statistics">
-            
+
+        <div className="statistics mt-5">
+            <div className="advance ">
+                <h1 className='mt-3 fs-1'>Advance Statistics</h1>
+                <p className='text-center ps-3 pe-3 fs-5'>Track how your links are performing across the web with our
+                    advanced statistics dashboard.
+                </p>
+            </div>
+            <div className="three_things w-100 d-flex flex-column align-items-center justify-content-center">
+                <div className="brand">
+                    <img src={brand} alt="" />
+                    <h1 className='mt-5 mb-3'>Brand Recogtion</h1>
+                    <p className='text-center ps-3 pe-3 fs-5'>Boost your brand recognition with each click.Generic links 
+                        don't mean a thing.Branded links help instil confidence in your content.
+                    </p>
+                </div>
+                <div className="detail">
+                    <img src={detail} alt="" />
+                    <h1 className='mt-5 mb-3'>Detailed Records</h1>
+                    <p className='text-center ps-3 pe-3 fs-5'>Gain insights into who is clicking your links.Knowing when where people engage
+                        with your content helps infog better decisions.
+                    </p>
+                </div>
+                <div className="fully">
+                    <img src={fully} alt="" />
+                    <h1 className='mt-5 mb-3'>Fully Customizable</h1>
+                    <p className='text-center ps-3 pe-3 fs-5'>Impreove brand awareness content discoverability through customizable links,
+                        supercharging audience engagement.
+                    </p>
+                </div>
+
+            </div>
         </div>
 
     </section>
