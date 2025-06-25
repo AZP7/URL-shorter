@@ -56,8 +56,6 @@
 .result_link span{
     font-size: 1.3rem;
     overflow-x: hidden;
-}
-.result_link span{
     width: 100%;
 }
 .short_link{
@@ -105,4 +103,80 @@
     position: relative;
     margin-top: 2rem;
     border-radius: 15px;
+}
+@media(min-width:992px){
+    .main{
+        padding-left: 2.4rem;
+    }
+    .icon_container {
+        width: 50%;
+    }
+    .D_intro{
+        width: 45%;
+    }
+    .D_intro h1{
+        font-weight: 700;
+        font-size:3.5rem;
+    }   
+    .D_intro button{
+        font-weight: 700;
+        background-color: hsl(180, 66%, 49%);
+        cursor: pointer;
+        outline: none;
+    }
+    .get_Link input{
+        width: 75%;
+    }
+    .get_Link button{
+        width: 15%;
+    }
+    .result_link .original_link{
+        width: 45% !important;
+        color: red;
+        text-wrap: nowrap;
+        border-bottom: none !important;
+    }
+    .result_link .short_link{
+        width: 30% !important;
+    }
+    .result_link button{
+        width: 10%;
+        font-size: 1.3rem !important;
+    }
+    .advance{
+        width: 40% !important;
+        text-align: center;
+    }
+    .advance h1{
+        font-size: 1.8rem !important;
+    }
+    .advance p{
+        font-size:1rem !important;
+    }
+    .three_things >div{
+        width: 28% !important;
+        padding-bottom: 2.5rem;
+        border: 1px solid rgb(230, 230, 230);
+    }
+    .three_things>div>h1{
+        width: 100%;
+        margin-bottom: 1rem;
+        font-size: 1.4rem !important;
+
+    }
+    .three_things>div>p{
+        margin-bottom: 1rem;
+        font-size: .7rem !important;
+        text-align: left !important;
+
+    }
+    .three_things >div>img{
+        padding: .5rem .7rem !important;
+    }
+    .detail{
+        transform: translateY(10%);
+    }
+    .fully{
+        transform: translateY(20%);
+    }
 }
