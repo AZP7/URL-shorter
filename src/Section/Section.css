@@ -44,9 +44,9 @@
     font-weight: 600;
 }
 .get_Link p{
-    color: red;
     width: 90%;
     text-align: left;
+    color: red;
     font-family: inherit;
 }
 .result_link{
