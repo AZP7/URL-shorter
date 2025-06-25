@@ -8,17 +8,23 @@ import fully from '../assets/images/icon-fully-customizable.svg'
 
 
 function Section() {
-    const [shortUrl, setShortUrl] = useState([]);
     const [error, setError] = useState()
     const [isLoading, setIsLoading] = useState(false)
     const URL = '/api/api/v1/shorten';
-    const originalUrl = 'https://ondemand6.scilearn.com/slc/learner?tenantId=1511017';
-    const [takeLink, setTakeLink] = useState('')
+    const [takeLink, setTakeLink] = useState([])
     const [ShowResult,setShowResult] = useState([])
+    const [copy,setCopy] = useState('')
 
     const HandleShortURl = async () => {
         if (isLoading) return;
         setIsLoading(true);
+        if(takeLink.length === 0){
+            setError('Please enter a link')
+            return
+        }
+        else{
+            setError('')
+        }
         try {
             const response = await fetch(`${URL}`, {
                 method: "POST",
@@ -28,7 +34,6 @@ function Section() {
                 body: new URLSearchParams({ url: takeLink })
             });
             const data = await response.json();
-            
             setShowResult(prev => [...prev, data.result_url]);
 
         } catch (err) {
@@ -39,8 +44,8 @@ function Section() {
     }
 
     const GetTheLink = (e)=>{
-        
-        setTakeLink(e.target.value)
+
+       setTakeLink( prev=> [...prev,e.target.value])
 
     }
 
@@ -48,8 +53,16 @@ function Section() {
         HandleShortURl();
     }
 
-    const CreatResult = () => {
-        setShowResult(prev => [...prev, shortUrl]);
+    const copyText =async (text)=>{
+        try{
+            await navigator.clipboard.writeText(text);  
+            setCopy(text)
+            setTimeout(() => {
+                setCopy('')
+            }, 2000);
+        }catch(error){
+            console.log('cannot copy!')
+        }
     }
 
   return(
@@ -75,7 +88,7 @@ function Section() {
 
             <div className='get_Link border rounded rounded-3 d-flex flex-column align-items-center justify-content-center '>
                 <input type="text" value={takeLink} onChange={GetTheLink} placeholder='Shorten a link here' className='mt-3 border-0 mb-3 rounded rounded-3'/>
-                <p>{error}</p>
+                {error && <p className="error-message">{error}</p>}
                 
                 <button  onClick={Generate} className='mb-3 border-0 rounded rounded-3' >Shorten It!</button>
 
@@ -83,12 +96,18 @@ function Section() {
             <div className='results-container w-100 d-flex flex-column  justify-content-center align-items-center'>
                 {
                     ShowResult.map((content,index)=>(
-
-                        <div key={index} className='result_link mt-4 rounded rounded-3 border d-flex flex-column align-items-center justify-content-center'>
-                            <span className='pt-2 ps-2 pb-2 border-bottom border-2 text-left'>{takeLink}</span>
-                            <span className='short_link pt-3 ps-2 pb-3 text-left'>{content}</span>
-                            <button className='mt-3 mb-3 rounded rounded-3 border-0'>copy</button>
-                        </div>
+                        takeLink.map((link,index1)=>(
+                            index === index1 ?
+                                <div key={index} className='result_link mt-4 rounded rounded-3 border d-flex flex-column align-items-center justify-content-center'>
+          
+                                    <span key={index1} className='pt-2 ps-2 pb-2 border-bottom border-2 text-left'>{link}</span>
+                                    <span className='short_link pt-3 ps-2 pb-3 text-left text-wrap'>{content}</span>
+                                    <button className='mt-3 mb-3 rounded rounded-3 border-0' onClick={()=>copyText(content)}>
+                                        {copy === content ? 'copied' : 'copy'}
+                                    </button>
+                                </div>
+                                : null
+                        ))
                     ))
                 }
 

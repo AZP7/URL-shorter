@@ -55,6 +55,7 @@
 }
 .result_link span{
     font-size: 1.3rem;
+    overflow-x: hidden;
 }
 .result_link span{
     width: 100%;
