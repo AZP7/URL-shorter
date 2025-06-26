@@ -1,24 +1,32 @@
+/* Mobile navigation overlay - hidden by default */
 .mobile_nav{
     background-color:hsl(257, 27%, 26%);
     width: 90vw;
     border-radius: 20px;
-    top: -100%;
+    top: -100%; /* Start off-screen */
 }
+
+/* Class applied when mobile menu is open */
 .open{
-    
-    animation: floating 1s forwards ;
+    animation: floating 1s forwards ; /* Slide-in animation */
 }
+
+/* Keyframe animation for mobile menu slide-in effect */
 @keyframes floating{
     0%{
-        top:-100%;
+        top:-100%; /* Start position - off-screen */
     }
     100%{
-        top: 10%;
+        top: 10%; /* End position - visible on screen */
     }
 }
+
+/* Mobile navigation links container */
 .mobile_ul{
     width: 100%;
 }
+
+/* Individual mobile navigation link styling */
 .mobile_ul >li{
     color: #fff;
     font-weight: 600;
@@ -26,9 +34,13 @@
     margin-top: 2rem;
     cursor: pointer;
 }
+
+/* Mobile button container for login/signup */
 .m_btn_container{
     width: 100%;
 }
+
+/* Mobile button styling */
 .m_btn_container button{
     cursor: pointer;
     color: #fff;
@@ -37,69 +49,101 @@
     border: none;
     outline: none;
 }
+
+/* Mobile login button - transparent background */
 .m_btn_container >button:first-child{
     background-color: transparent;
 }
+
+/* Mobile signup button - brand color background */
 .m_btn_container > button:last-child{
     background-color: hsl(180, 66%, 49%);
     width: 70%;
     border-radius: 20px;
 }
+
+/* Main header container */
 .m_header{
   background-color: rgb(248, 248, 248);
     padding: 1.3rem 1.5rem;
 }
+
+/* Hamburger menu icon styling */
 .menu{
     cursor: pointer;
     width: 10%;
 }
+
+/* Desktop navigation container */
 .d_nav{
     width: 80%;
 }
+
+/* Desktop navigation links container */
 .d_ul{
     width: 55%;
     height: 100%;
 }
+
+/* Individual desktop navigation link */
 .d_ul>li{
     font-weight: 600;
     font-family: "Montserrat", sans-serif;;
     cursor: pointer;
-    transition: all .6s ease;
+    transition: all .6s ease; /* Smooth hover transition */
 }
+
+/* Desktop navigation link hover effect */
 .d_ul>li:hover{
     color: hsl(180, 66%, 49%);
 }
+
+/* Desktop button container for login/signup */
 .d_btn_container{
     width: 30%;
 }
+
+/* Desktop button styling */
 .d_btn_container button{
     outline: none;
     border: none;
     cursor: pointer;
     font-weight: 600;
 }
+
+/* Desktop login button - transparent background */
 .d_btn_container >button:first-child{
     background-color: transparent;
 }
+
+/* Desktop signup button - brand color background */
 .d_btn_container >button:last-child{
     padding: .5rem 1.4rem;
     border-radius: 20px;
     color: #fff;
     background-color: hsl(180, 66%, 49%);
 }
+
+/* Large desktop styles - 992px and above */
 @media(min-width:992px){
+    /* Desktop signup button spacing */
     .d_btn_container button:last-child{
         margin-left: 2rem;
         padding: .6rem 2rem;   
     }
+    /* Desktop navigation link spacing */
     .d_ul> li{
         margin-right: 2rem;
     }
 }
+
+/* Extra large desktop styles - 1200px and above */
 @media(min-width:1200px){
+    /* Larger font size for desktop navigation links */
     .d_ul>li{
         font-size: 1.3rem;
     }
+    /* Larger font size for desktop buttons */
     .d_btn_container button{
         font-size: 1.3rem;
     }

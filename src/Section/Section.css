@@ -1,20 +1,30 @@
+/* Main section container - full width */
 .section_{
     width: 100%;
 }
+
+/* Container for the working illustration image */
 .icon_container{
     width: 100%;
 }
+
+/* Ensure illustration image covers container properly */
 .icon_container img{
     object-fit: cover;
 }
+
+/* Hero section intro text styling */
 .intro h1{
     font-size: 3rem;
     font-weight: 800;
 }
+
 .intro p{
     width: 90%;
     font-size: 1.3rem;
 }
+
+/* Hero section CTA button styling */
 .intro button{
     padding: .5rem 1rem;
     border: none;
@@ -24,13 +34,19 @@
     color: #fff;
     font-weight: 600;
 }
+
+/* URL shortening section container */
 .create_links{
     width: 100%;
 }
+
+/* URL input form container with dark background */
 .get_Link{
     background-color: hsl(257, 27%, 26%);
     width: 90%;
 }
+
+/* Input field and button styling within the form */
 .get_Link input, .get_Link button {
     width: 90%;
     outline: 0;
@@ -38,29 +54,41 @@
     font-size: 1.3rem;
 
 }
+
+/* Shorten button styling with brand color */
 .get_Link button{
     background-color: hsl(180, 66%, 49%);
     color: #fff;
     font-weight: 600;
 }
+
+/* Error message styling */
 .get_Link p{
     width: 90%;
     text-align: left;
     color: red;
     font-family: inherit;
 }
+
+/* Individual result item container */
 .result_link{
     background-color: #fff;
     width: 90%;
 }
+
+/* Result text styling */
 .result_link span{
     font-size: 1.3rem;
     overflow-x: hidden;
     width: 100%;
 }
+
+/* Shortened URL color styling */
 .short_link{
     color: hsl(180, 66%, 49%);
 }
+
+/* Copy button styling */
 .result_link button{
     background-color: hsl(180, 66%, 49%);
     color: #fff;
@@ -70,25 +98,37 @@
     outline: 0;
     width: 95%;
 }
+
+/* Statistics section container */
 .statistics{
     width: 100%;
 }
+
+/* Statistics section child elements */
 .statistics>div{
     width: 100%;
 }
+
+/* Center alignment for statistics content */
 .statistics .advance, .three_things>div{
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
 }
+
+/* Statistics section heading */
 .advance h1{
     font-weight: 700;
 }
+
+/* Statistics section text styling */
 .advance p , .three_things>div>p{
     color: grey;
     font-weight: 550;
 }
+
+/* Feature card icon styling with circular background */
 .three_things >div>img{
     padding:.6rem 1.1rem;
     border-radius: 50%;
@@ -97,6 +137,8 @@
     top: -10%;
 
 }
+
+/* Individual feature card styling */
 .three_things>div{
     width: 90%;
     background-color: #fff;
@@ -104,78 +146,117 @@
     margin-top: 2rem;
     border-radius: 15px;
 }
+
+/* Desktop styles - applied at 992px and above */
 @media(min-width:992px){
+    /* Main hero section desktop layout */
     .main{
         padding-left: 2.4rem;
     }
+    
+    /* Hero illustration container - half width on desktop */
     .icon_container {
         width: 50%;
     }
+    
+    /* Desktop intro text container */
     .D_intro{
         width: 45%;
     }
+    
+    /* Desktop hero heading */
     .D_intro h1{
         font-weight: 700;
         font-size:3.5rem;
     }   
+    
+    /* Desktop CTA button */
     .D_intro button{
         font-weight: 700;
         background-color: hsl(180, 66%, 49%);
         cursor: pointer;
         outline: none;
     }
+    
+    /* Desktop form layout - input takes most space */
     .get_Link input{
         width: 75%;
     }
+    
+    /* Desktop form layout - button takes less space */
     .get_Link button{
         width: 15%;
     }
+    
+    /* Desktop result layout - original URL styling */
     .result_link .original_link{
         width: 45% !important;
         color: red;
         text-wrap: nowrap;
         border-bottom: none !important;
     }
+    
+    /* Desktop result layout - shortened URL styling */
     .result_link .short_link{
         width: 30% !important;
     }
+    
+    /* Desktop result layout - copy button styling */
     .result_link button{
         width: 10%;
         font-size: 1.3rem !important;
     }
+    
+    /* Desktop statistics section header */
     .advance{
         width: 40% !important;
         text-align: center;
     }
+    
+    /* Desktop statistics heading */
     .advance h1{
         font-size: 1.8rem !important;
     }
+    
+    /* Desktop statistics description */
     .advance p{
         font-size:1rem !important;
     }
+    
+    /* Desktop feature cards - three column layout */
     .three_things >div{
         width: 28% !important;
         padding-bottom: 2.5rem;
         border: 1px solid rgb(230, 230, 230);
     }
+    
+    /* Desktop feature card headings */
     .three_things>div>h1{
         width: 100%;
         margin-bottom: 1rem;
         font-size: 1.4rem !important;
 
     }
+    
+    /* Desktop feature card descriptions */
     .three_things>div>p{
         margin-bottom: 1rem;
         font-size: .7rem !important;
         text-align: left !important;
 
     }
+    
+    /* Desktop feature card icons */
     .three_things >div>img{
         padding: .5rem .7rem !important;
     }
+    
+    /* Second feature card - offset for visual hierarchy */
     .detail{
         transform: translateY(10%);
     }
+    
+    /* Third feature card - more offset for visual hierarchy */
     .fully{
         transform: translateY(20%);
     }

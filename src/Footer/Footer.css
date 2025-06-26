@@ -1,30 +1,43 @@
+/* Main footer container */
 .footer{
     width: 100%;
 }
+
+/* Boost section container with dark background */
 .boost_L {
     width: 100%;
-    height: 20vh;
+    height: 20vh; /* Mobile height */
     overflow: hidden;
     background-color:hsl(257, 27%, 26%) ;
 }
+
+/* Boost section background image */
 .boost_L img{
     width: 100%;
 }
+
+/* Boost section CTA button styling */
 .boo_get button{
     font-size: 1.4rem;
     padding: .6rem 1.4rem;
     background-color: hsl(180, 66%, 49%);
     font-weight: 600;
 }
+
+/* Footer links section with dark background */
 .about{
     background-color: hsl(260, 8%, 14%);
     width: 100%;
 }
+
+/* Footer company name/brand styling */
 .about >h2{
     font-weight: 600;
     font-size: 2.2rem;
     text-align: center;
 }
+
+/* Footer navigation links container */
 .about>ul{
     display: flex;
     align-items: center;
@@ -33,45 +46,68 @@
     padding: 0;
     margin-top: 2rem;
 }
+
+/* Footer section headings (Features, Resources, Company) */
 .about>ul>span{
     font-size: 1.3rem;
     color: #fff;
     font-weight: 600;
 }
+
+/* Individual footer navigation links */
 .about>ul>li{
     margin-top: 1rem;
     color: grey;
 }
+
+/* Social media icons spacing */
 .social img{
     margin-left: 1rem;
     margin-right: 1rem;
 
 }
+
+/* Desktop styles - 992px and above */
 @media(min-width:992px){
+    /* Desktop boost section - taller height */
     .boost_L{
         height: 35vh !important;
         overflow: hidden;
     }
+    
+    /* Desktop boost section heading */
     .boo_get h1{
         font-weight: 700;
     }
+    
+    /* Desktop boost section button with hover effects */
     .boo_get button{
         transition: all .5s ease;
         font-weight: 660 !important;
     }
+    
+    /* Desktop boost section button hover state */
     .boo_get button:hover{
         background-color: hsl(180, 100%, 78%);
     }
+    
+    /* Desktop social media container width */
     .social{
         width: 20% !important;
     }
+    
+    /* Desktop footer links spacing */
     .about>ul{
         margin-top: 0 !important;
         padding-top: 1rem;
     }
+    
+    /* Desktop footer links with hover effects */
     .about>ul>li{
         transition: all .7s ease;
     }
+    
+    /* Desktop footer links hover state */
     .about>ul>li:hover{
         color: hsl(180, 100%, 78%);
     }
