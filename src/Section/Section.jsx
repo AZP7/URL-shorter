@@ -12,7 +12,7 @@ function Section() {
     // State to track loading state during API calls
     const [isLoading, setIsLoading] = useState(false)
     // API endpoint for URL shortening (note: has duplicate /api in path)
-    const URL = '/api/api/v1/shorten';
+    const URL = 'https://cleanuri.com/api/api/v1/shorten';
     // State to store user input URLs
     const [takeLink, setTakeLink] = useState('')
     const [originalLink,setOriginalLink] = useState([])
