@@ -8,13 +8,14 @@ import fully from '../assets/images/icon-fully-customizable.svg'
 // Main Section component containing URL shortening functionality and landing page content
 function Section() {
     // State for error handling and display
-    const [error, setError] = useState()
+    const [error, setError] = useState('')
     // State to track loading state during API calls
     const [isLoading, setIsLoading] = useState(false)
     // API endpoint for URL shortening (note: has duplicate /api in path)
     const URL = '/api/api/v1/shorten';
     // State to store user input URLs
-    const [takeLink, setTakeLink] = useState([])
+    const [takeLink, setTakeLink] = useState('')
+    const [originalLink,setOriginalLink] = useState([])
     // State to store shortened URLs returned from API
     const [ShowResult,setShowResult] = useState([])
     // State to track which URL was last copied for UI feedback
@@ -23,44 +24,50 @@ function Section() {
     // Async function to handle URL shortening via API call
     const HandleShortURl = async () => {
         // Prevent multiple simultaneous API calls
-        if (isLoading) return;
-        setIsLoading(true);
+        // if (isLoading) return;
+        // setIsLoading(true);
         
         // Validate that user has entered a URL
-        if(takeLink.length === 0){
-            setError('Please enter a link')
-            return
+        if(takeLink.length > 0){
+            setError('')
+            try {
+                // Make POST request to URL shortening API
+                const response = await fetch(`${URL}`, {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: new URLSearchParams({ url: takeLink })
+                });
+                if(!response.ok){
+                    const ErrorData = await response.json()
+                    throw new Error(ErrorData.message || "Failed to shorten URL!")
+                }
+
+                const data = await response.json();
+                
+                // Add the shortened URL to results array
+                setShowResult(prev => [...prev, data.result_url]);
+                setOriginalLink(prev=>[...prev,takeLink])
+                setTakeLink('')
+            } 
+            catch (error) {
+                // Handle API errors
+                setError(error.message || "Something went wrong!");
+            } finally {
+                // Reset loading state regardless of success/failure
+                setIsLoading(false);
+            }
         }
         else{
-            setError('')
-        }
-        
-        try {
-            // Make POST request to URL shortening API
-            const response = await fetch(`${URL}`, {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: new URLSearchParams({ url: takeLink })
-            });
-            const data = await response.json();
-            // Add the shortened URL to results array
-            setShowResult(prev => [...prev, data.result_url]);
+            setError('Please enter a link')
+        }   
 
-        } catch (err) {
-            // Handle API errors
-            setError(err.message || 'Failed to shorten URL');
-        } finally {
-            // Reset loading state regardless of success/failure
-            setIsLoading(false);
-        }
     }
 
     // Event handler for input field changes
     const GetTheLink = (e)=>{
-       // Add new URL to the array of URLs (note: this adds to array instead of replacing)
-       setTakeLink( prev=> [...prev,e.target.value])
+       setTakeLink( e.target.value)
     }
 
     // Wrapper function to trigger URL shortening
@@ -149,7 +156,7 @@ function Section() {
                 <input type="text" value={takeLink} onChange={GetTheLink} placeholder='Shorten a link here' className='mt-3 ps-lg-2 pe-lg-2 pt-lg-2 pb-lg-2 border-0 mb-3 rounded rounded-3'/>
                
                 {/* Error message display - mobile only */}
-                {desktop ? null :error && <p className="error-message">{error}</p>}
+                {desktop ? null :error.length >0 ?  <p className="error-message">{error}</p> : null}
                 
                 {/* Shorten button */}
                 <button  onClick={Generate} className='mb-3 mb-lg-0 border-0 ps-lg-2 pe-lg-2 pt-lg-2 pb-lg-2 rounded rounded-3' >Shorten It!</button>
@@ -163,7 +170,7 @@ function Section() {
                 {/* Map through results and display each shortened URL with original */}
                 {
                     ShowResult.map((content,index)=>(
-                        takeLink.map((link,index1)=>(
+                        originalLink.map((link,index1)=>(
                             index === index1 ?
                                 // Individual result item with original URL, shortened URL, and copy button
                                 <div key={index} className='result_link mt-4 flex-lg-row rounded rounded-3 border d-flex flex-column align-items-center justify-content-center'>
