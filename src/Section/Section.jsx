@@ -15,25 +15,26 @@ function Section() {
     
     // API endpoint for URL shortening (note: has duplicate /api in path)
     const URL = `https://api.tinyurl.com/create?api_token=${APIKEY}`;  
+  
     // const URL = `https://api.tinyurl.com/create`;  
     const [takeLink, setTakeLink] = useState('')
     const [originalLink,setOriginalLink] = useState([])
+  
     // State to store shortened URLs returned from API
     const [ShowResult,setShowResult] = useState([])
+  
     // State to track which URL was last copied for UI feedback
     const [copy,setCopy] = useState('')
 
     // Async function to handle URL shortening via API call
     const HandleShortURl = async () => {
-        // Prevent multiple simultaneous API calls
-        // if (isLoading) return;
-        // setIsLoading(true);
         
         // Validate that user has entered a URL
         if(takeLink.length > 0){
             setError('')
             try {
                 setIsLoading(true)
+
                 // Make POST request to URL shortening API
                 const response = await fetch(`${URL}`, {
                     method: "POST",
@@ -158,7 +159,11 @@ function Section() {
                 {desktop ? null :error.length >0 ?  <p className="error-message">{error}</p> : null}
                 
                 {/* Shorten button */}
-                <button  onClick={Generate} className='mb-3 mb-lg-0 border-0 ps-lg-2 pe-lg-2 pt-lg-2 pb-lg-2 rounded rounded-3' >Shorten It!</button>
+                <button  onClick={Generate} className={`mb-3 mb-lg-0 border-0 ps-lg-2 pe-lg-2 pt-lg-2 pb-lg-2 rounded rounded-3 ${isLoading ? "loadingState" : null}`} >
+                    {
+                        isLoading ? "Loading..." : "Shorten It!"
+                    }
+                </button>
 
             </div>
             {/* Error message display - desktop only */}
