@@ -9,7 +9,7 @@ function Section() {
     const [error, setError] = useState('')
 
     // State to track loading state during API calls
-    const [isLoading, setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(false)
     
     const APIKEY = 'bilO7Dwf6dDFhfufeUu32WvPsjhdKVu8KL6y5QT43zQPvvIyxNT2Vl5TKalL';
     
