@@ -11,8 +11,10 @@ function Section() {
     const [error, setError] = useState('')
     // State to track loading state during API calls
     const [isLoading, setIsLoading] = useState(false)
+    const APIKEY = 'bilO7Dwf6dDFhfufeUu32WvPsjhdKVu8KL6y5QT43zQPvvIyxNT2Vl5TKalL';
     // API endpoint for URL shortening (note: has duplicate /api in path)
-    const URL = '/api/api/v1/shorten';    // State to store user input URLs
+    const URL = `https://api.tinyurl.com/create?api_token=${APIKEY}`;  
+    // const URL = `https://api.tinyurl.com/create`;  
     const [takeLink, setTakeLink] = useState('')
     const [originalLink,setOriginalLink] = useState([])
     // State to store shortened URLs returned from API
@@ -43,10 +45,10 @@ function Section() {
                     throw new Error(ErrorData.message || "Failed to shorten URL!")
                 }
 
-                const data = await response.json();
+                const apidata = await response.json();
                 
-                // Add the shortened URL to results array
-                setShowResult(prev => [...prev, data.result_url]);
+
+                setShowResult(prev => [...prev, apidata.data.tiny_url]);
                 setOriginalLink(prev=>[...prev,takeLink])
                 setTakeLink('')
             } 
