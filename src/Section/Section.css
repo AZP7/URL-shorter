@@ -137,6 +137,11 @@
     top: -10%;
 
 }
+.LoadingState{
+    background-color: hsl(257, 27%, 26%) !important;
+    border: 1px solid #fff !important;
+    
+}
 
 /* Individual feature card styling */
 .three_things>div{

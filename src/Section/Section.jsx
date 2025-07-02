@@ -5,33 +5,33 @@ import brand from '../assets/images/icon-brand-recognition.svg'
 import detail from '../assets/images/icon-detailed-records.svg'
 import fully from '../assets/images/icon-fully-customizable.svg'
 
-// Main Section component containing URL shortening functionality and landing page content
 function Section() {
-    // State for error handling and display
     const [error, setError] = useState('')
+
     // State to track loading state during API calls
-    const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
+    
     const APIKEY = 'bilO7Dwf6dDFhfufeUu32WvPsjhdKVu8KL6y5QT43zQPvvIyxNT2Vl5TKalL';
+    
     // API endpoint for URL shortening (note: has duplicate /api in path)
     const URL = `https://api.tinyurl.com/create?api_token=${APIKEY}`;  
-    // const URL = `https://api.tinyurl.com/create`;  
     const [takeLink, setTakeLink] = useState('')
     const [originalLink,setOriginalLink] = useState([])
+
     // State to store shortened URLs returned from API
     const [ShowResult,setShowResult] = useState([])
+
     // State to track which URL was last copied for UI feedback
     const [copy,setCopy] = useState('')
 
     // Async function to handle URL shortening via API call
     const HandleShortURl = async () => {
-        // Prevent multiple simultaneous API calls
-        // if (isLoading) return;
-        // setIsLoading(true);
         
         // Validate that user has entered a URL
         if(takeLink.length > 0){
             setError('')
             try {
+                setIsLoading(true)
                 // Make POST request to URL shortening API
                 const response = await fetch(`${URL}`, {
                     method: "POST",
@@ -53,9 +53,11 @@ function Section() {
                 setTakeLink('')
             } 
             catch (error) {
+
                 // Handle API errors
                 setError(error.message || "Something went wrong!");
             } finally {
+
                 // Reset loading state regardless of success/failure
                 setIsLoading(false);
             }
@@ -160,7 +162,12 @@ function Section() {
                 {desktop ? null :error.length >0 ?  <p className="error-message">{error}</p> : null}
                 
                 {/* Shorten button */}
-                <button  onClick={Generate} className='mb-3 mb-lg-0 border-0 ps-lg-2 pe-lg-2 pt-lg-2 pb-lg-2 rounded rounded-3' >Shorten It!</button>
+                <button  onClick={Generate} className={`mb-3 mb-lg-0 border-0 ps-lg-2 pe-lg-2 pt-lg-2 pb-lg-2 rounded rounded-3 ${isLoading ? 'LoadingState' : null}`} >
+                    {
+                        isLoading ? 'Loading' :
+                        "Shorten It!"
+                    }
+                </button>
 
             </div>
             {/* Error message display - desktop only */}
@@ -174,7 +181,7 @@ function Section() {
                         originalLink.map((link,index1)=>(
                             index === index1 ?
                                 // Individual result item with original URL, shortened URL, and copy button
-                                <div key={index} className='result_link mt-4 flex-lg-row rounded rounded-3 border d-flex flex-column align-items-center justify-content-center'>
+                                <div key={index} className={`result_link mt-4 flex-lg-row rounded rounded-3 border d-flex flex-column align-items-center justify-content-center `}>
           
                                     {/* Original URL display */}
                                     <span key={index1} className='original_link me-lg-3 pt-2 ps-2 pb-2 border-bottom border-2 text-left'>{link}</span>
