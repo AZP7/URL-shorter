@@ -146,7 +146,14 @@
     margin-top: 2rem;
     border-radius: 15px;
 }
-
+.loadingState{
+    background-color: hsl(257, 27%, 26%) !important;
+    transition: all .8s ease !important;
+    border: 1px solid #afafaf !important;
+    pointer-events: none; /* Prevents clicking */
+    opacity: 0.5;          /* Faded look */
+    cursor: not-allowed;   /* Shows disabled cursor */
+}
 /* Desktop styles - applied at 992px and above */
 @media(min-width:992px){
     /* Main hero section desktop layout */

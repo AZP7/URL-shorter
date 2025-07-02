@@ -9,29 +9,30 @@ import fully from '../assets/images/icon-fully-customizable.svg'
 function Section() {
     // State for error handling and display
     const [error, setError] = useState('')
+
     // State to track loading state during API calls
     const [isLoading, setIsLoading] = useState(false)
     const APIKEY = 'bilO7Dwf6dDFhfufeUu32WvPsjhdKVu8KL6y5QT43zQPvvIyxNT2Vl5TKalL';
+    
     // API endpoint for URL shortening (note: has duplicate /api in path)
     const URL = `https://api.tinyurl.com/create?api_token=${APIKEY}`;  
+    
     // const URL = `https://api.tinyurl.com/create`;  
     const [takeLink, setTakeLink] = useState('')
     const [originalLink,setOriginalLink] = useState([])
+    
     // State to store shortened URLs returned from API
     const [ShowResult,setShowResult] = useState([])
+    
     // State to track which URL was last copied for UI feedback
     const [copy,setCopy] = useState('')
 
     // Async function to handle URL shortening via API call
     const HandleShortURl = async () => {
-        // Prevent multiple simultaneous API calls
-        // if (isLoading) return;
-        // setIsLoading(true);
-        
-        // Validate that user has entered a URL
         if(takeLink.length > 0){
             setError('')
             try {
+                setIsLoading(true)
                 // Make POST request to URL shortening API
                 const response = await fetch(`${URL}`, {
                     method: "POST",
@@ -48,7 +49,9 @@ function Section() {
                 const apidata = await response.json();
                 
 
-                setShowResult(prev => [...prev, apidata.data.tiny_url]);
+                setShowResult( prev=>(
+                    prev.includes(apidata.data.tiny_url) ? prev : [...prev,apidata.data.tiny_url]
+                ) )
                 setOriginalLink(prev=>[...prev,takeLink])
                 setTakeLink('')
             } 
@@ -56,7 +59,6 @@ function Section() {
                 // Handle API errors
                 setError(error.message || "Something went wrong!");
             } finally {
-                // Reset loading state regardless of success/failure
                 setIsLoading(false);
             }
         }
@@ -81,9 +83,7 @@ function Section() {
         try{
             // Use clipboard API to copy text
             await navigator.clipboard.writeText(text);  
-            // Set copied state for UI feedback
             setCopy(text)
-            // Clear copied state after 2 seconds
             setTimeout(() => {
                 setCopy('')
             }, 2000);
@@ -95,18 +95,13 @@ function Section() {
     // State to track if we're on desktop viewport
     const [desktop,setDesktop] = useState()
     
-    // Effect to handle responsive design and window resize
     useEffect(()=>{
-        // Function to check viewport width and update desktop state
         const HandleResize = ()=>{
             setDesktop(()=>{return window.innerWidth > 991 })
         }
 
-        // Add resize event listener
         window.addEventListener('resize',HandleResize)
-        // Initial call to set correct state on mount
         HandleResize()
-        // Cleanup: remove event listener on unmount
         return(()=>{
             window.removeEventListener('resize',HandleResize)
         })
@@ -160,7 +155,12 @@ function Section() {
                 {desktop ? null :error.length >0 ?  <p className="error-message">{error}</p> : null}
                 
                 {/* Shorten button */}
-                <button  onClick={Generate} className='mb-3 mb-lg-0 border-0 ps-lg-2 pe-lg-2 pt-lg-2 pb-lg-2 rounded rounded-3' >Shorten It!</button>
+                <button  onClick={Generate} className={`mb-3 mb-lg-0 border-0 ps-lg-2 pe-lg-2 pt-lg-2 pb-lg-2 rounded rounded-3 ${ isLoading ? 'loadingState' : null}`} >
+                   {
+                    isLoading ? "Loading...":
+                    "Shorten It!"
+                   }
+                </button>
 
             </div>
             {/* Error message display - desktop only */}
